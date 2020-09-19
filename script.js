@@ -4,12 +4,13 @@ $(document).ready(function() {
     // on the search button class, onClick = 
     $("#searchButton").on("click", function() {
 
-        // setting value to 
+        // setting value to this class
         var searchValue = $("#search-value").val();
     
         // clear input box
         $("#search-value").val("");
     
+        // search weather function 
         searchWeather(searchValue);
       });
     
@@ -21,11 +22,15 @@ $(document).ready(function() {
         var li = $("<li>").addClass("list-group-item list-group-item-action").text(text);
         $(".history").append(li);
       }
+
+      // bread and butter here 
+
+      // going to expose free api key, should be fine. 
     
       function searchWeather(searchValue) {
         $.ajax({
           type: "GET",
-          url: "http://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=439774d0a3cb0c9d93a87255666e3c9c",
+          url: "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=439774d0a3cb0c9d93a87255666e3c9c",
           dataType: "json",
           success: function(data) {
             // create history link for this search
@@ -64,7 +69,7 @@ $(document).ready(function() {
       function getForecast(searchValue) {
         $.ajax({
           type: "GET",
-          url: "http://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=439774d0a3cb0c9d93a87255666e3c9c",
+          url: "https://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=439774d0a3cb0c9d93a87255666e3c9c",
           dataType: "json",
           success: function(data) {
             // overwrite any existing content with title and empty row
@@ -98,7 +103,7 @@ $(document).ready(function() {
       function getUVIndex(lat, lon) {
         $.ajax({
           type: "GET",
-          url: "http://api.openweathermap.org/data/2.5/uvi?appid=439774d0a3cb0c9d93a87255666e3c9c&lat=" + lat + "&lon=" + lon,
+          url: "https://api.openweathermap.org/data/2.5/uvi?appid=439774d0a3cb0c9d93a87255666e3c9c&lat=" + lat + "&lon=" + lon,
           dataType: "json",
           success: function(data) {
             var uv = $("<p>").text("UV Index: ");
